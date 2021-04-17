@@ -26,8 +26,8 @@ def read():
                 splits = line.split('\t')
                 print(f" {splits}")
                 sentence = splits[0]
-                labels = splits[1:-1]
-                #print(f" {labels}")
+                labels = splits[1:]
+                print(f" {labels}")
                
                 label_task3 = "NA"
                 if len(labels) == 3:
@@ -38,6 +38,8 @@ def read():
            
     df = pd.DataFrame(lst)
     print(f"shape {df.shape}")
+    print(f"shape {df.head}")
+
 
 if __name__ == "__main__":
     read()
