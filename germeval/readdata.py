@@ -1,7 +1,7 @@
 import glob
 import collections
 import pandas as pd
-# TODO class reader
+import itertools
 
 import re
 
@@ -10,25 +10,21 @@ PROFANITY = "PROFANITY"
 OTHER = "OTHER"
 
 def readblist():
+    text = []
     for name in glob.glob('Beschwerdeliste.csv'):
-        text = []
         with open(name) as fp:
-            print(f" {name}")
             lines = fp.readlines()
             for line in lines:
                 splits = line.split(",")
                 term = splits[1]
                 text.append(term.strip().lower())
-    # for i in text:
-    #     print(f"profanity::  {i}")
     return text
 
 def exact_match(targetlst):
-    #tuple
-
-    count = 0
+    text = []
+    terms = []
     for name in glob.glob('germeval/*.txt'):
-        text = []
+
         with open(name) as fp:
             print(f" {name}")
             lines = fp.readlines()
@@ -36,21 +32,19 @@ def exact_match(targetlst):
                 line = line.strip()
                 splits = line.split('\t')
                 sentence = splits[0]
-
-                tmp = [(t,line) for t in targetlst if t in line.lower()]
-                if  tmp: 
-                    text.append(tmp)
-# """ 
-#                 labels = splits[1:]
-            
-#                 label_task3 = "NA"
-#                 if len(labels) == 3:
-#                     label_task3 = labels[2] """
-
+        #   """       tmp = [(t,line) for t in targetlst if t in line.lower()]
+        #         if  tmp: 
+                   
+        #             text.append(list(itertools.chain(*tmp))) # flatten the list """
                 
-   
-    print(f"beschwerde::  {text}")    
-    print(f"Count B-list {len(text)}")   
+                
+                for term in targetlst:
+                    if term in sentence.lower():
+                        text.append(sentence) 
+                        terms.append(term)
+
+    print(f"Count B-list {len(text)}") 
+    print(f"Unique terms {len(set(terms))}")   
     # for i in text:
     #     print(f"beschwerde::  {i}")
 
@@ -118,7 +112,7 @@ def read():
 if __name__ == "__main__":
    #profanity()
    targets = readblist()
-   intargetlist(targets)
+   exact_match(targets)
 
 
     
