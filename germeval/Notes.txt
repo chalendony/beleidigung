@@ -1,3 +1,65 @@
+
+Challenge: 
+
+a) detect positive intent beschwerde then NER - OUT OF SCOPE TICKET
+Model 2: create data positive and negative examples for each blist term build intent classification
+
+b) germeval mentions of entity - but it is not offensive (OTHER)
+
+
+Assumption : just detecting the terms in the sentence
+number of blist terms: 2110
+
+Data : 
+store germeval in database
+collect germeval training data
+code for doccano input germeval
+extract inexact match of germeval with b-list : 1511 exact match
+
+
+
+Model 1 : NER extractor
+set up code to adapt existing NER
+training first model
+evaluation first model
+ 
+
+Model 3 : ensemble
+
+
+
+Devop: 
+store germeval in database ()
+doccano annotation service /raw text converted to, doccano format
+displacy visualization service
+
+
+
+
+---------------------------
+Idea Generate positve and negative training data:
+
+https://huggingface.co/models?pipeline_tag=text-generation&search=german
+
+ex. benjamin/gerpt2-large HAHAH
+Vollidiotisch, weil… man(n) hat sich die Scheiße selbst gegeben!
+Und nun: Ficken wir noch ein bisschen härter!
+„Und nun: Ficken wir noch ein bisschen härter!
+Ich möchte gerne über den Zustand
+
+-----------
+ German GPT2 : GPT-2 stands for “Generative Pretrained Transformer 2”
+
+Walross ist ein kleiner Dorf, das im Jahr 1898 gegründet wurde und ein wichtiges Tor des Deutschen Reiches im Herzen des Landes bildet.
+Sie befindet sich ungefähr 120 Kilometer südlich von Mannheim, zwischen Mannheim und Mannheim, der zweitgrößten Stadt Deutschlands.
+Der
+
+Walrosses-Stadion, um das Team von morgen zu erleben.
+Das erste mal war für uns eine echte Herausforderung.
+Das war die ideale Plattform für die Spiele!
+Die letzten Tage waren sehr hart und wir können nach dem ersten Spiel noch
+
+
 https://www.thetraveltart.com/german-swear-words-slang-expletives/
 https://www.rypeapp.com/blog/german-swear-words
 
