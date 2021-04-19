@@ -9,13 +9,12 @@ shuffle all data then split
 number of blist terms: 2110 / 457 terms exact match - (may not be offensive or at least 1500 bterms not have a sentence
 
 Data Prep: 
-store germeval in database
+[x] clean text before annotated
+[x] run regex matcher to tag words
+[x] store germeval in database 
+[x] create subset exact match blist
+create ner training data
 
-* exact match dataset : regex 
-create subset exact match and offensive
-create germeval training data
-code for doccano input germeval
-* inexact match :  match of germeval with b-list 
 
 Build Model
 
