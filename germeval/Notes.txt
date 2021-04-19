@@ -1,55 +1,65 @@
 Data Germeval:
 germeval mentions of entity - but it is not offensive *** OTHER
 These tweets are categorized in 4 classes: PROFANITY, INSULT, ABUSE, and OTHERS. 
-The highest score achieved on this dataset is 0.7361. This problem is challenging! - OUT OF SCOPE TICKET
+The highest score achieved on this dataset is 0.7361. This problem is challenging! 
 
-Assume : just detecting the terms in the sentence - not exact match as NER task
-number of blist terms: 2110
-germeval overlap B-list 11772 exact match
-distinct terms 457 exact match - may not be offensive or at least 1500 bterms not have a sentence
+
+Assume Simplifications : 
+shuffle all data then split
+number of blist terms: 2110 / 457 terms exact match - (may not be offensive or at least 1500 bterms not have a sentence
 
 Data Prep: 
 store germeval in database
 
-* exact match
+* exact match dataset : regex 
 create subset exact match and offensive
 create germeval training data
 code for doccano input germeval
+* inexact match :  match of germeval with b-list 
 
-* inexact match
-match of germeval with b-list 
+Build Model
+
+Model 1: Token Classification (NER) 
+adapt existing NER with a new entities from bList: https://huggingface.co/transformers/custom_datasets.html#tok-ner
+
+Model 2:  Profanity Classifier
+Try existing Profanity classifiers:  (ralf, igor?)
+
+Evaluation Performance
 
 
-
-Fine tune Hugging Face NER 
-set up code to adapt existing NER
-training first model
-evaluation first model
- 
- 
-
-
-Devop: 
-store germeval in database ()
+DevOp: 
+store germeval in database 
 doccano annotation service /raw text converted to, doccano format
 displacy visualization service
 
 
 
 
----------------------------
-Idea Generate positve and negative training data:
+Fine tune Hugging Face NER :
+https://colab.research.google.com/drive/1kAlGGGsZaFaFoL0lZ0HK4xUR6QS8gipn#scrollTo=svum1ZL4dlHn
+
+
+ 
+ 
+
+
+
+
+
+
+
+-----------
+ German GPT2 : GPT-2 stands for “Generative Pretrained Transformer 2”
 
 https://huggingface.co/models?pipeline_tag=text-generation&search=german
 
-ex. benjamin/gerpt2-large HAHAH
+ex. benjamin/gerpt2-large HAHAH (https://huggingface.co/benjamin/gerpt2-large?text=Vollidiot)
 Vollidiotisch, weil… man(n) hat sich die Scheiße selbst gegeben!
 Und nun: Ficken wir noch ein bisschen härter!
 „Und nun: Ficken wir noch ein bisschen härter!
 Ich möchte gerne über den Zustand
 
------------
- German GPT2 : GPT-2 stands for “Generative Pretrained Transformer 2”
 
 Walross ist ein kleiner Dorf, das im Jahr 1898 gegründet wurde und ein wichtiges Tor des Deutschen Reiches im Herzen des Landes bildet.
 Sie befindet sich ungefähr 120 Kilometer südlich von Mannheim, zwischen Mannheim und Mannheim, der zweitgrößten Stadt Deutschlands.
