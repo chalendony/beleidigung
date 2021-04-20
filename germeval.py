@@ -16,8 +16,8 @@ from preprocessing import clean_tweet
 data_path = "./data"
 beschwerde_file = data_path + "/Beschwerdeliste.csv"
 
-#germeval_file = data_path + "/*.txt"
-germeval_file = data_path + "/germeval2018.training.txt"
+germeval_file = data_path + "/*.txt"
+#germeval_file = data_path + "/germeval2018.training.txt"
 
 PROFANITY = "PROFANITY"
 OTHER = "OTHER"
@@ -167,5 +167,5 @@ if __name__ == "__main__":
     germeval = GermanEval()
     blist = germeval.readblist()
     df = germeval.germaneval_beschwerden(blist)
-    #cx = ClipToExa(tablename="ASR_GERMANEVAL_BESCHWERDEN", dev_mode=False, df=df)
-    #cx.main()
+    cx = ClipToExa(tablename="ASR_GERMANEVAL_BESCHWERDEN", dev_mode=False, df=df)
+    cx.main()
