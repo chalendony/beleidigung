@@ -1,5 +1,5 @@
 """
-Demonstrator to show the entities that are detected within text
+Demonstrator to visualize the entities that are detected
 """
 from germeval import GermanEval
 from conll import beschwerden_matcher

@@ -5,6 +5,19 @@ from string import Template
 entity_types = {"beschwerden": "BESCHWER", "person":"PERSON"}
 
 
+# Spacy: override for spacy html templates for rendering entity
+TEMPLATE_ENT = """<mark data-entity="{label}">
+{text}</mark>
+"""
+
+# CSS: html templates for css
+MARK_OPEN = Template("""
+<mark data-entity="$ner_type">
+$ner_value
+"""  )
+
+MARK_CLOSE = " </mark>"
+
 HTML_TEMPLATE = Template("""
 <!DOCTYPE html>
 <html>
@@ -31,16 +44,3 @@ h1 {
 </html>
 """
 )
-
-
-MARK = Template(
-"""
-  <mark data-entity="$ner_type">
-      $ner_value
-  </mark>
-"""  
-
-)
-
-
-
