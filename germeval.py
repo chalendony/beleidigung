@@ -125,6 +125,15 @@ class GermanEval:
         # print(terms)
         return terms
 
+
+    def load_demo(self):
+        docs = [{"id":"42","text":"Die htte man frher als Hexe verbrannt."},
+                {"id":"43","text":"Die Zeit ist berreif fr dass groe ausmesten in Politik, Justiz u Medien dieses ganze Rot Grn versiffte Parteibuch Pack zum Teufel jagen"},
+                {"id":"44","text":"Ein Afrikaner der in China lebt oder geboren ist, ist dann WAS? Africhinese. Das ist lachhaft. Es gibt nur eine Nationale Identitt. Sie hngt von der Abstammung ab. Eine Ratte die im Pferdestall geboren wird, ist auch niemals ein Pferd. Darber sollte wohl Einigkeit bestehen."},
+                {"id":"45","text":"Bei den Antifa Terroristen fllt mir nur eins ein, Der Dieb rannte aus dem Kaufhaus und schrie, haltet den Dieb"},
+                {"id":"46","text":"Wie dmlich mssen erst die Sesselfurzer sein wenn sie den Unterschied von 17 und 32 Jahren nicht erkennen....?"}]
+        return docs
+
     def profanity(self):
         count = 0
         for name in glob.glob("germeval/*.txt"):

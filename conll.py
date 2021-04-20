@@ -7,26 +7,30 @@ import pandas as pd
 import spacy
 from spacy.pipeline import EntityRuler
 import re 
-from collections import namedtuple
 
-# maybe this can be blank??
+from germeval import GermanEval
+from constants import Entity
+
 nlp = spacy.load("de_core_news_sm")
-Entity = namedtuple("Entity", "entity_value, start, end, entity_type, ")
+
+# TODO: move to constants
 entity_types = {"beschwerden": "BESCHWER", "person":"PERSON"}
 
-def beschwerden_matcher():
-    name = "Sebastian|XYZ"
-    regex = f"{name}"
-    docs = ["XYZ Sebastian ist in der Welt und hat gefunden."]
+def beschwerden_matcher(blist, docs):
+    rexpression = "|".join(blist)
+    regex = f"{rexpression}"
 
-    lst = []
+    doc_lst = []
     for adoc in docs:
-        matches = re.finditer(regex, adoc, re.MULTILINE)
+        entity_lst = []
+        docid = adoc["id"]
+        text = adoc["text"]
+        matches = re.finditer(regex, text.lower(), re.MULTILINE)
         for match_number, match in enumerate(matches, start=0):
-            lst.append(Entity(match.group(),match.start(),match.end(), entity_types["beschwerden"] ))
-            
+            entity_lst.append(Entity(docid, match.group(),match.start(),match.end(), entity_types["beschwerden"] ))
+        doc_lst.append([docid, text, entity_lst])        
               
-    return lst
+    return doc_lst
 
 
 
@@ -49,6 +53,8 @@ def conll(text):
 
 
 if __name__ == "__main__":
-    lst = exactmatcher()
-    print(lst)
+    lst = GermanEval().readblist()
+    docs = ""
+    entities = beschwerden_matcher(lst, docs)
+    print(entities)
 

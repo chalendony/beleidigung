@@ -2,18 +2,40 @@
 # use spacy to display annotations
 import spacy
 from spacy import displacy
+from constants import Entity
 
-# maybe this can be blank??
 nlp = spacy.load("de_core_news_sm")
 
-# override for html templates
-TPL_ENTS = """
-<div class="entities">{content}</div>
-"""
-
-TPL_ENT = """
+# override for spacy html templates
+TEMPLATE_ENT = """
 <mark data-entity="{label}">{text}</mark>
 """
+
+def render(annotations):
+    
+    docmap = []
+    for ann in annotations:
+        docid = ann[0]
+        text = ann[1].lower()
+        print(text)
+        entity = ann[2]
+        doc = nlp(text)
+        ents = []
+        distinct_entities = []
+        for e in entity:
+            start = getattr(e, "start")
+            end = getattr(e, "end")
+            entity_value = getattr(e, "entity_value")
+            distinct_entities.append(entity_value)
+            print(f"*************{entity_value}, {start}, {end}")
+            ents.append(doc.char_span(start, end, entity_value))
+        print(ents)
+        doc.ents = ents
+        options = {"ents": list(set(distinct_entities)), "template": TEMPLATE_ENT}
+        render = displacy.render(docs=doc, style="ent", options=options)
+        docmap.append((docid, render))
+    return docmap
+
 
 
 def display():

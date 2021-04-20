@@ -2,7 +2,6 @@ import glob
 import collections
 import pandas as pd
 import itertools
-
 import re
 
 Germeval = collections.namedtuple(
