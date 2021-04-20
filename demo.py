@@ -1,9 +1,9 @@
 """
-Demostrator to show the entities that are detected within text
+Demonstrator to show the entities that are detected within text
 """
 from germeval import GermanEval
 from conll import beschwerden_matcher
-from visual import render
+from visual import render_css, render_displacy
 
 
 if __name__ == "__main__":
@@ -17,6 +17,6 @@ if __name__ == "__main__":
     annotations = beschwerden_matcher(lst, docs)
 
     # visually markup entities
-    docmap = render(annotations)
+    docmap = render_css(annotations)
 
-    # TODO pass to  html ....
+

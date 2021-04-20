@@ -9,12 +9,11 @@ from spacy.pipeline import EntityRuler
 import re 
 
 from germeval import GermanEval
-from constants import Entity
+from constants import Entity, entity_types
 
 nlp = spacy.load("de_core_news_sm")
 
-# TODO: move to constants
-entity_types = {"beschwerden": "BESCHWER", "person":"PERSON"}
+
 
 def beschwerden_matcher(blist, docs):
     rexpression = "|".join(blist)
