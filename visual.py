@@ -2,6 +2,8 @@ import spacy
 from spacy import displacy
 from constants import Entity, entity_types, HTML_TEMPLATE,  MARK_CLOSE, MARK_OPEN
 from string import Template
+from operator import attrgetter
+
 nlp = spacy.load("de_core_news_sm")
 
 
@@ -18,17 +20,17 @@ def render_css(annotations):
         print(text)
         entity = ann[2]
         entity = sorted(entity, key=attrgetter('end'))
+        # goes wonkey when multiple entities in single file, so using string replacement instead of positional replacement
         for e in entity:
-            # goes wonkey when multiple entities in single file because ending text is pasted each time through the loop
+            # get string
             entity_type = getattr(e, "entity_type")
             entity_value = getattr(e, "entity_value")
             start = getattr(e, "start")
             end = getattr(e, "end")
+            target = text[start:end]
+            text = text.replace(target, f"{MARK_OPEN.substitute(ner_type=entity_type, ner_value=entity_value)}  {MARK_CLOSE}", 1)
             # insert mark around entity within 
-            result = result + f"{text[0:start]} {MARK_OPEN.substitute(ner_type=entity_type, ner_value=entity_value)}  {MARK_CLOSE} {text[end:-1]} <br>"
-            # try replace
-
-
+        result = result + text
     result = HTML_TEMPLATE.substitute(mark=result)        
     with open("demo.html", "w") as f:   
         f.write(result)
