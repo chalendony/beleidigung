@@ -35,6 +35,7 @@ def render_css(annotations):
     with open("demo.html", "w") as f:   
         f.write(result)
     print("See file: demo.html")
+    return result
 
 
 
@@ -65,27 +66,3 @@ def render_displacy(annotations):
     html(docmap)    
     return docmap
 
-
-
-def display_tmp():
-
-    text = "XYZ Sebastian ist in der Welt und hat gefunden."
-    # give the span
-    entities = [("BEL", 0, 3), ("PPP", 4, 13)]
-    doc = nlp(text)
-
-    ents = []
-    for ee in entities:
-        ents.append(doc.char_span(ee[1], ee[2], ee[0]))
-
-    doc.ents = ents
-    colors = {"BEL": "#E8DAEF", "PPP": "#F02A8F"}
-    entities = ["BEL", "PPP"]
-
-    options = {"ents": entities, "colors": colors, "template": TPL_ENT}
-    render = displacy.render(docs=doc, style="ent", options=options)
-    print(render)
-
-
-if __name__ == "__main__":
-    display_tmp()
